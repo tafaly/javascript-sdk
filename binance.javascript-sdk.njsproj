@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>javascript-sdk</Name>
+    <RootNamespace>javascript-sdk</RootNamespace>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>1c629e80-3279-4ef3-9cfb-1fc038ba416e</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>server.ts</StartupFile>
+    <StartWebBrowser>True</StartWebBrowser>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <NodejsPort>1337</NodejsPort>
+    <EnableTypeScript>true</EnableTypeScript>
+    <StartWebBrowser>True</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="RD /S /Q &quot;$(SolutionDir)\Tafaly.ICW.ASP\node_modules\@binance-chain\javascript-sdk\lib&quot;" />
+    <Exec Command="XCOPY &quot;$(ProjectDir)\lib&quot; &quot;$(SolutionDir)\Tafaly.ICW.ASP\node_modules\@binance-chain\javascript-sdk\lib\&quot; /E /I /H /R /K /Y" />
+    <!-- <Exec Command="MD &quot;$(SolutionDir)\Tafaly.ICW.ASP\node_modules\@binance-chain\javascript-sdk\node_modules\lib\&quot;" />
+    <Exec Command="COPY /Y &quot;$(ProjectDir)\lib&quot; &quot;$(SolutionDir)\Tafaly.ICW.ASP\node_modules\@binance-chain\javascript-sdk\node_modules\lib\&quot;" /> -->
+    <Exec Command="RD /S /Q &quot;$(ProjectDir)\lib&quot;" />
+  </Target>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\**\*.ts" />
+    <TypeScriptCompile Include="server.ts" />
+    <Content Include="tsconfig.json" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\" />
+    <Folder Include="src\amino\" />
+    <Folder Include="src\amino\decoder\" />
+    <Folder Include="src\amino\encoder\" />
+    <Folder Include="src\client\" />
+    <Folder Include="src\client\bridge\" />
+    <Folder Include="src\client\gov\" />
+    <Folder Include="src\client\stake\" />
+    <Folder Include="src\client\swap\" />
+    <Folder Include="src\client\token\" />
+    <Folder Include="src\crypto\" />
+    <Folder Include="src\ledger\" />
+    <Folder Include="src\rpc\" />
+    <Folder Include="src\tx\" />
+    <Folder Include="src\types\" />
+    <Folder Include="src\types\msg\" />
+    <Folder Include="src\types\msg\base\" />
+    <Folder Include="src\types\msg\claim\" />
+    <Folder Include="src\types\msg\dex\" />
+    <Folder Include="src\types\msg\gov\" />
+    <Folder Include="src\types\msg\stake\" />
+    <Folder Include="src\types\msg\token\" />
+    <Folder Include="src\types\rpc\" />
+    <Folder Include="src\types\tx\" />
+    <Folder Include="src\utils\" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
